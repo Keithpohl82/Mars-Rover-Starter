@@ -17,7 +17,7 @@ describe("Message class", function() {
     }});
 
     test("contains a commands array passed into the constructor as the 2nd argument", function(){{
-        let commands = [new Command("Move UP", "Move DOWN", "Move LEFT", "Move RIGHT")];
+        let commands = [new Command("MODE_CHANGE", "LOW_POWER"), new Command('STATUS_CHECK')];
         expect(typeof commands).toBe("object");
     }});
 

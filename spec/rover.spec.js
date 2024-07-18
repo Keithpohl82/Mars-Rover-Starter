@@ -10,16 +10,20 @@ describe("Rover class", function() {
 
   // 7 tests here!
   test("constructor sets position and default values for mode and generatorWatts", function(){
-
+    let testRover = new Rover(98382);  
+    expect(testRover).toEqual(new Rover(98382, "NORMAL", 110));
   });
   test("response returned by receiveMessage contains the name of the message", function(){
-
+    let testRover = new Rover(98382);
+    expect(testRover.receiveMessage().name).toEqual("New Test Message");
   });
   test("response returned by receiveMessage includes two results if two commands are sent in the message", function(){
-
+    let testRover = new Rover(98382);
+    expect(testRover.receiveMessage().results.length).toBeGreaterThanOrEqual(2);
   });
   test("responds correctly to the status check command", function(){
-
+    let testCommand = new Command("STATUS_CHECK");
+    expect(testCommand.value).toBeUndefined();
   });
   test("responds correctly to the mode change command", function(){
 
