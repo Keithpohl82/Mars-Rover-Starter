@@ -9,15 +9,15 @@ const Command = require('../command.js');
 describe("Rover class", function() {
 
   // 7 tests here!
-  test("constructor sets position and default values for mode and generatorWatts", function(){
+  test("constructor sets position and default values for mode and generatorWatts.", function(){
     let testRover = new Rover(98382);  
     expect(testRover).toEqual(new Rover(98382, "NORMAL", 110));
   });
-  test("response returned by receiveMessage contains the name of the message", function(){
+  test("response returned by receiveMessage contains the name of the message.", function(){
     let testRover = new Rover(98382);
     expect(testRover.receiveMessage().name).toEqual("New Test Message");
   });
-  test("response returned by receiveMessage includes two results if two commands are sent in the message", function(){
+  test("response returned by receiveMessage includes two results if two commands are sent in the message.", function(){
     let testRover = new Rover(98382);
     expect(testRover.receiveMessage().results.length).toBeGreaterThanOrEqual(2);
   });
