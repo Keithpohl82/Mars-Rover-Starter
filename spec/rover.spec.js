@@ -15,11 +15,15 @@ describe("Rover class", function() {
   });
   test("response returned by receiveMessage contains the name of the message.", function(){
     let testRover = new Rover(98382);
-    expect(testRover.receiveMessage().name).toEqual("New Test Message");
+    let commands = [new Command('MODE_CHANGE', "LOW_POWER"), new Command('STATUS_CHECK'), new Command("MOVE", 846548)];
+    let testMessage = new Message("New Test Message", commands);
+    expect(testRover.receiveMessage(testMessage).message).toEqual("New Test Message");
   });
   test("response returned by receiveMessage includes two results if two commands are sent in the message.", function(){
+    let commands = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
+    let message = new Message('Test message with two commands', commands);
     let testRover = new Rover(98382);
-    expect(testRover.receiveMessage().results.length).toBeGreaterThanOrEqual(2);
+    expect(testRover.receiveMessage(message).results.length).toBeGreaterThanOrEqual(2);
   });
   test("responds correctly to the status check command", function(){
     let testCommand = new Command("STATUS_CHECK");

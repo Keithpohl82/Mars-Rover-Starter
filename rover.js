@@ -3,24 +3,22 @@ const Command = require('./command.js');
 
 class Rover {
    
-   constructor(position, mode = "NORMAL", generatorWatts = 110){
+   constructor(position){
       this.position = position;
-      this.mode = mode;
-      this.generatorWatts = generatorWatts;
+       let mode = "NORMAL";
+       let generatorWatts = 110;
    }
    
    receiveMessage(message){
-      let commands = [new Command('MODE_CHANGE', "LOW_POWER"), new Command('STATUS_CHECK'), new Command("MOVE", 846548)];
-      message = new Message("New Test Message", commands);
-      let testObject = {
-         name: message.name,
-         results: message.commands
-      };
-      return testObject;
+      /* The object from message should be built and returned from here. */
+      
+      message = {
+         message: message.name,
+         results: message.commands,        
+      }
+      console.log(this.position)
+      return message;
    };
 }
-
-
-
 
 module.exports = Rover;
