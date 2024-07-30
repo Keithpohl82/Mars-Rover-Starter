@@ -30,7 +30,12 @@ describe("Rover class", function() {
     expect(testCommand.value).toBeUndefined();
   });
   test("responds correctly to the mode change command", function(){
-
+    let statusCommand = new Command("MODE_CHANGE", "LOW_POWER");
+    let message = new Message("Change Rover to LOW_POWER", statusCommand);
+    let testRover = new Rover(2468);
+    let response = testRover.receiveMessage(message);
+    
+    expect(response.results[0].roverStatus.mode).toEqual("LOW_POWER");
   });
   test("responds with a false completed value when attempting to move in LOW_POWER mode", function(){
 
