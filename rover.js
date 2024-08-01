@@ -5,8 +5,8 @@ class Rover {
    
    constructor(position){
       this.position = position;
-       let mode = "NORMAL";
-       let generatorWatts = 110;
+       this.mode = "LOW_POWER";
+       this.generatorWatts = 110;
    }
    
    receiveMessage(message){
@@ -18,25 +18,31 @@ class Rover {
       }
       for(let i = 0; i < message.commands.length; i++){
          if(message.commands[i].commandType === "MODE_CHANGE"){
-            this["mode"] = message.commands[i].value;
+            if(this.mode === message.commands[i].commandType.value){
+               response.results.push({complete: false})
+               console.log("This should have pushed false to array");
+            }
             
-            response.results.push({complete: true})
+            console.log(`current mode: ${this.mode}`)
+            this.mode = message.commands[i].value;
+            console.log(`New Mode mode: ${message.commands[i].commandType.value}`)            
+            response.results.push({completed: true,})
          }
          if(message.commands[i].commandType === "MOVE"){
             
             this.position = message.commands[i].value;
-            response.results.push({complete: true})
+            response.results.push({completed: true,})
          }
-         if(message.commands[i].commandType === "STATUS_CHECK"){
-            //this.generatorWatts = generatorWatts,
+         if(message.commands[i] && message.commands[i].commandType === "STATUS_CHECK"){
+            
             response.results.push({
-               complete: true,
+               completed: true,
                roverStatus: {
-                  mode: this.mode, 
-                  generatorWatts: this.generatorWatts, 
-                  position: this.position}
+                  mode: this.mode,
+                  generatorWatts: this.generatorWatts,
+                  position: this.position,
+               }
             })
-            console.log(response.roverStatus);
          }
          
       }      
