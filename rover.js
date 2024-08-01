@@ -25,6 +25,7 @@ class Rover {
                response.results.push({completed: false})
             }else{
                response.results.push({completed: true})
+               this.mode = command.value;
             }
 
          }

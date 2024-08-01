@@ -42,12 +42,12 @@ describe("Rover class", function() {
     expect(response.results[1].roverStatus.mode).toEqual("LOW_POWER");
   });
   test("responds with a false completed value when attempting to move in LOW_POWER mode", function(){
-    let statusCommand = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK'), new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK')];
+    let statusCommand = [new Command('MODE_CHANGE', 'LOW_POWER'), new Command('STATUS_CHECK'), new Command('MOVE', 1616), new Command('STATUS_CHECK')];
     let message = new Message("Change Rover to LOW_POWER", statusCommand);
     let testRover = new Rover(13579);
     let response = testRover.receiveMessage(message);
 
-    expect(response.results[0].completed).toBeFalsy();
+    expect(response.results[2].completed).toBeFalsy();
 
   });
   test("responds with the position for the move command", function(){
